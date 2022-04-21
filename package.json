@@ -1,0 +1,15 @@
+{
+  "name": "Blog",
+  "version": "1.0.0",
+  "description": "Just a simple blog",
+  "main": "server.js",
+  "author": "MrDrawn",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.7",
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.19.0"
+  }
+}
