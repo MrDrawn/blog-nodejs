@@ -20,7 +20,7 @@ server.use(express.urlencoded({extended: false}));
 server.use(express.json());
 
 server.get('/', async (request, response) => {
-  const articles = await Article.findAll({raw: true, order: [['id', 'desc']]});
+  const articles = await Article.findAll({raw: true, order: [['id', 'desc']], limit: 4});
   const categories = await Category.findAll({raw: true, order: [['id', 'desc']]});
 
   return response.render('index', {

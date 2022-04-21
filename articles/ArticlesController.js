@@ -17,6 +17,41 @@ router.get('/admin/articles', async (request, response) => {
   });
 });
 
+router.get('/articles/page/:page', async (request, response) => {
+  const {page} = request.params;
+
+  const limit = 4;
+
+  var offset = 0;
+
+  if (isNaN(page) || page == 1) offset = 0;
+  else offset = parseInt(page) * limit;
+
+  const articles = await Article.findAndCountAll({
+    limit,
+    offset,
+    order: [['id', 'desc']],
+  });
+
+  var next;
+
+  if (offset + limit >= articles.count) next = false;
+  else next = true;
+
+  var result = {
+    page: parseInt(page),
+    next: next,
+    articles: articles,
+  };
+
+  const categories = await Category.findAll({raw: true});
+
+  return response.render('admin/articles/page', {
+    result,
+    categories,
+  });
+});
+
 router.get('/admin/articles/create', async (request, response) => {
   const categories = await Category.findAll({raw: true});
 

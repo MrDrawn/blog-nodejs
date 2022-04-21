@@ -1,0 +1,30 @@
+<%- include ('../../components/header.ejs'); %>
+<body>
+  <%- include ('../../components/homenavbar.ejs'); %>
+  <div class="container mt-5">
+    <h1>Articles</h1>
+    <hr />
+    <% result.articles.rows.forEach(article => { %>
+    <div class="card mt-2">
+      <div class="card-header"><%= article.title %></div>
+      <div class="card-body">
+        <a class="btn btn-success" href="/<%= article.slug %>">Read article</a>
+      </div>
+    </div>
+    <% }) %>
+    <hr />
+    <div class="row">
+      <div class="col col-12">
+        <% if (result.page > 2) { %>
+        <a style="float: left" href="/articles/page/<%= result.page - 1 %>"><<< Prev</a>
+        <% } else if (result.page == 2) { %>
+        <a style="float: left" href="/"><<< Prev</a>
+        <% }%> <% if (result.next) { %>
+        <a style="float: right" href="/articles/page/<%= result.page + 1 %>">Next >>></a>
+        <% } %>
+      </div>
+      <hr />
+    </div>
+  </div>
+</body>
+<%- include ('../../components/footer.ejs'); %>
