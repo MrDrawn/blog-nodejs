@@ -1,0 +1,23 @@
+<%- include ('components/header.ejs'); %>
+<body>
+  <%- include ('components/homenavbar.ejs'); %>
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-header">
+        <h2><%= article.title %></h2>
+      </div>
+      <div class="card-body"><%- article.content %></div>
+    </div>
+  </div>
+</body>
+<%- include ('components/footer.ejs'); %>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: '#article',
+    language: 'pt_BR',
+    plugins:
+      'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons',
+  });
+</script>
