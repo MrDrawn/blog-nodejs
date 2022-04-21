@@ -2,26 +2,39 @@
 <body>
   <%- include ('../../components/navbar.ejs'); %>
   <div class="container mt-5">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Slug</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% categories.forEach(category => { %>
-        <tr>
-          <th scope="row"><%= category.id %></th>
-          <td><%= category.title %></td>
-          <td><%= category.slug %></td>
-          <td><button class="btn btn-sm btn-danger">Remove</button></td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
+    <div class="card">
+      <div class="card-header">
+        <h2>Categories</h2>
+        <a class="btn btn-success" href="/admin/categories/create">Create</a>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Slug</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% categories.forEach(category => { %>
+            <tr>
+              <th scope="row"><%= category.id %></th>
+              <td><%= category.title %></td>
+              <td><%= category.slug %></td>
+              <td>
+                <a class="btn btn-sm btn-warning">Edit</a>
+                <a class="btn btn-sm btn-danger" href="/categories/delete/<%= category.id %>"
+                  >Remove</a
+                >
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </body>
 <%- include ('../../components/footer.ejs'); %>
