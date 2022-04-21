@@ -10,6 +10,7 @@ const mysql = new Sequelize(
   {
     host: process.env.mysql_hostname,
     dialect: 'mysql',
+    timezone: '-03:00',
   },
 );
 

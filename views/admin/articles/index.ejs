@@ -13,6 +13,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Title</th>
+              <th scope="col">Category</th>
               <th scope="col">Slug</th>
               <th scope="col">Actions</th>
             </tr>
@@ -22,6 +23,7 @@
             <tr>
               <th scope="row"><%= article.id %></th>
               <td><%= article.title %></td>
+              <td><%= article.category.title %></td>
               <td><%= article.slug %></td>
               <td>
                 <a class="btn btn-sm btn-warning" href="/admin/articles/edit/<%= article.id %>"
