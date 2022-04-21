@@ -1,10 +1,17 @@
 const express = require('express');
 
+const session = require('express-session');
+
+const usersController = require('./users/UsersController');
 const categoriesController = require('./categories/CategoriesController');
 const articlesController = require('./articles/ArticlesController');
 
+const User = require('./users/User');
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
+
+const dotenv = require('dotenv');
+dotenv.config();
 
 const mysql = require('./database/mysql');
 mysql
@@ -15,7 +22,18 @@ mysql
 const server = express();
 
 server.set('view engine', 'ejs');
+
+server.use(
+  session({
+    secret: process.env.secret,
+    cookie: {
+      maxAge: 3600000,
+    },
+  }),
+);
+
 server.use(express.static('public'));
+
 server.use(express.urlencoded({extended: false}));
 server.use(express.json());
 
@@ -72,6 +90,7 @@ server.get('/category/:slug', async (request, response) => {
   });
 });
 
+server.use('/', usersController);
 server.use('/', categoriesController);
 server.use('/', articlesController);
 

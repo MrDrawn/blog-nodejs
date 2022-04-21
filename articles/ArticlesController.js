@@ -5,9 +5,11 @@ const router = express.Router();
 const Category = require('../categories/Category');
 const Article = require('./Article');
 
+const auth = require('../middlewares/auth');
+
 const slugify = require('slugify');
 
-router.get('/admin/articles', async (request, response) => {
+router.get('/admin/articles', auth, async (request, response) => {
   const articles = await Article.findAll({
     include: [{model: Category}],
   });
@@ -52,7 +54,7 @@ router.get('/articles/page/:page', async (request, response) => {
   });
 });
 
-router.get('/admin/articles/create', async (request, response) => {
+router.get('/admin/articles/create', auth, async (request, response) => {
   const categories = await Category.findAll({raw: true});
 
   return response.render('admin/articles/create', {
@@ -60,7 +62,7 @@ router.get('/admin/articles/create', async (request, response) => {
   });
 });
 
-router.post('/admin/articles/save', async (request, response) => {
+router.post('/admin/articles/save', auth, async (request, response) => {
   const {title, content, category} = request.body;
 
   if (!title || !content || !category) return response.redirect('/admin/articles/create');
@@ -70,7 +72,7 @@ router.post('/admin/articles/save', async (request, response) => {
   return response.redirect('/admin/articles');
 });
 
-router.get('/admin/articles/edit/:id', async (request, response) => {
+router.get('/admin/articles/edit/:id', auth, async (request, response) => {
   const {id} = request.params;
 
   if (!id || isNaN(id)) return response.redirect('/admin/articles');
@@ -87,7 +89,7 @@ router.get('/admin/articles/edit/:id', async (request, response) => {
   });
 });
 
-router.post('/admin/articles/update', async (request, response) => {
+router.post('/admin/articles/update', auth, async (request, response) => {
   const {id, title, content, category} = request.body;
 
   if (!id || !title || !content || !category) return response.redirect('/admin/articles');
@@ -109,7 +111,7 @@ router.post('/admin/articles/update', async (request, response) => {
   return response.redirect('/admin/articles');
 });
 
-router.post('/admin/articles/delete', async (request, response) => {
+router.post('/admin/articles/delete', auth, async (request, response) => {
   const {id} = request.body;
 
   if (!id || isNaN(id)) return response.redirect('/admin/articles');

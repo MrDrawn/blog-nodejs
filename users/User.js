@@ -2,17 +2,21 @@ const Sequelize = require('sequelize');
 
 const mysql = require('../database/mysql');
 
-const Category = mysql.define('categories', {
-  title: {
+const User = mysql.define('users', {
+  name: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  slug: {
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  password: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 });
 
-Category.sync({force: false});
+User.sync({force: false});
 
-module.exports = Category;
+module.exports = User;

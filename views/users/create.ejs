@@ -1,0 +1,45 @@
+<%- include ('../components/header.ejs'); %>
+<body>
+  <%- include ('../components/navbar.ejs'); %>
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-header">Create user</div>
+      <div class="card-body">
+        <form method="POST" action="/admin/users/save">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Define name"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Define email"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Define password"
+              class="form-control"
+            />
+          </div>
+          <button class="btn btn-success" type="submit">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+<%- include ('../components/footer.ejs') %>
