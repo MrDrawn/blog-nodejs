@@ -1,0 +1,46 @@
+<%- include ('../../components/header.ejs'); %>
+<body>
+  <%- include ('../../components/navbar.ejs'); %>
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-header">
+        <h2>Create article</h2>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/admin/articles/save">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Define title"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="content">Content</label>
+            <textarea
+              name="content"
+              id="article"
+              placeholder="Define content"
+              class="form-control"
+            ></textarea>
+          </div>
+          <button class="btn btn-success" type="submit">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+<%- include ('../../components/footer.ejs'); %>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: '#article',
+    language: 'pt_BR',
+    plugins:
+      'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons',
+  });
+</script>
