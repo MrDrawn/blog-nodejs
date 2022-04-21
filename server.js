@@ -16,14 +16,15 @@ const server = express();
 
 server.set('view engine', 'ejs');
 server.use(express.static('public'));
+server.use(express.urlencoded({extended: false}));
 server.use(express.json());
 
 server.get('/', (request, response) => {
   return response.render('index');
 });
 
-server.use('/categories', categoriesController);
-server.use('/articles', articlesController);
+server.use('/', categoriesController);
+server.use('/', articlesController);
 
 server.listen(3000, error => {
   if (error) {
